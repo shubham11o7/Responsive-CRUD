@@ -39,12 +39,13 @@ def CreateView(request):
     return render(request, 'create.html', {'form': form})
 
 def UpdateView(request,emp_id):
+
     employee=Employee.objects.get(emp_id=emp_id)
     if request.method=='POST':
         form=EmployeeForm(request.POST,instance=employee)
         if form.is_valid():
             form.save()
-            return redirect('index.html/')
+            return redirect('/')
     return render(request,'update.html',{'employee':employee})
 
 def DeleteView(request,emp_id):
