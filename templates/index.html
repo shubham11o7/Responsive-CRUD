@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+{% extends 'base.html'%}
+{%block body_block%}
+
+<h1>Employee Information DashBoard</h1><hr>
+
+<a href="/create/" class='btn btn-primary btn-lg'>Add Employee</a><br><br>
+
+<form
+      class="form-inline my-2 my-lg-0 mr-4" action="/search/">
+        <input class="form-control mr-sm-2" name="q"
+               type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-primary my-2 my-sm-0"
+                type="submit">Search</button><br><br>
+</form>
+
+    <table class="table">
+        <thead class="thead-dark">
+         <th>Employee ID</th>
+         <th>Employee First Name</th>
+         <th>Employee Last Name</th>
+         <th>Employee Address</th>
+         <th>Employee Salary</th>
+         <th>Actions</th>
+        </thead>
+{%for emp in employees %}
+    <tr>
+        <td>{{emp.emp_id}}</td>
+        <td>{{emp.firstname}}</td>
+        <td>{{emp.lastname}}</td>
+        <td>{{emp.emp_address}}</td>
+        <td>{{emp.emp_sal}}</td>
+        <td>
+            <a href="/update/{{emp.emp_id}}" class= 'btn btn-success'>Update</a>
+            <a href="/delete/{{emp.emp_id}}" class= 'btn btn-danger'>Delete</a>
+        </td>
+    </tr>
+{%endfor%}
+</table>
+
+{% if employees.has_other_pages %}
+  <ul class="pagination">
+    {% if employees.has_previous %}
+      <li><a href="?page={{ employees.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in employees.paginator.page_range %}
+      {% if users.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if employees.has_next %}
+      <li><a href="?page={{ employees.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+
+<!--<a href="/create/" class='btn btn-primary btn-lg'>Add New Employee</a>-->
+{%endblock%}
+
