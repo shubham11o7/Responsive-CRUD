@@ -81,12 +81,32 @@
 
 </script>
 
+
 <script>
 function myFunction() {
-  confirm("Are You Sure...!");
+  confirm("Press a button!");
 }
 </script>
 
+
+<script>
+$.(document).ready(function() {
+    ajax({
+        type: "GET",
+        url: "update",
+        dataType: "json",
+        success: function(response) {
+            var employees = JSON.parse(response["employees"]);
+            $("#employee option").remove();
+            var msg_data = "<option  value='0'>--Select Country--</option>";
+            $("#employee").append(msg_data).value;
+            $.each(employees, function(i, country) {
+                msg_data = "<option  value='" + country.pk + "'>" + employee.fields.emp_id + "</option>";
+                $("#employee").append(msg_data).value;
+            });
+        }
+});
+</script>
 <script>
     $('#dtBasicExample').mdbEditor({
     mdbEditor: true
