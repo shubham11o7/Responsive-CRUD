@@ -2,8 +2,10 @@
 {% extends 'base.html'%}
 {%block body_block%}
  <h1>Update Employee</h1><hr>
+
  <form method="post">
- {%csrf_token%}
+     {%csrf_token%}
+     {{ form.as_p }}
      Employee ID: <input type="text" name="emp_id" value="{{employee.emp_id}}"><p></p>
      Employee First Name: <input type="text" name="firstname" value="{{employee.firstname}}"><p></p>
      Employee LAST Name: <input type="text" name="lastname" value="{{employee.lastname}}"><p></p>
@@ -13,3 +15,4 @@
     <input type="submit" class='btn btn-success btn-lg' value="Update Record">
  </form>
 {%endblock%}
+

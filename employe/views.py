@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .models import Employee
 from .forms import EmployeeForm
 from django.db.models import Q
@@ -58,10 +58,4 @@ def DeleteView(request,emp_id):
     return redirect('/')
 
 
-def search(request):
-    q = request.GET["q"]
-    employees = Employee.objects.filter(Q(name__contains=q) | Q(id__contains=q)) #(name_icontaions)
-    # categories = Category.objects.filter(active=True)
-    context = {"employees": employees,
-               "title": q + " - search"}
-    return render(request, "index.html", context)
+#

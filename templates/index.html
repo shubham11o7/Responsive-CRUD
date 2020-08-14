@@ -4,27 +4,19 @@
 {%block body_block%}
 
 <h1>Employee Information DashBoard</h1><hr>
-<p align="right">
-    <a href="/create/" class='btn btn-primary btn-lg' >Add Employee</a><br><br>
+<p align="left">
+    <a href="/create/" class='btn btn-primary btn-lg' > +Add New</a><br><br>
 </p>
 
-<form
-      class="form-inline my-2 my-lg-0 mr-4" action="/search/">
-        <input class="form-control mr-sm-2" name="q"
-               type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-primary my-2 my-sm-0"
-                type="submit">Search</button><br><br>
-</form>
-
-    <table class="table">
-        <thead class="thead-dark">
+<table class="table" id="employeetable">
+    <thead class="thead-dark">
          <th>Employee ID</th>
          <th>Employee First Name</th>
          <th>Employee Last Name</th>
          <th>Employee Address</th>
          <th>Employee Salary</th>
          <th>Actions</th>
-        </thead>
+    </thead>
 {%for emp in employees %}
     <tr>
         <td>{{emp.emp_id}}</td>
@@ -33,12 +25,14 @@
         <td>{{emp.emp_address}}</td>
         <td>{{emp.emp_sal}}</td>
         <td>
-            <a href="/update/{{emp.emp_id}}" class= 'btn btn-success'>Update</a>
-            <a href="/delete/{{emp.emp_id}}" class= 'btn btn-danger'>Delete</a>
+            <a href="/update/{{emp.emp_id}}"target="_top" class= 'btn btn-success'>Update</a>
+            <a href="/delete/{{emp.emp_id}}" class= 'btn btn-danger' id="" onclick="myFunction()"> Delete </a>
         </td>
     </tr>
+
 {%endfor%}
 </table>
+
 
 {% if employees.has_other_pages %}
   <ul class="pagination">
@@ -48,7 +42,7 @@
       <li class="disabled"><span>&laquo;</span></li>
     {% endif %}
     {% for i in employees.paginator.page_range %}
-      {% if users.number == i %}
+      {% if employees.number == i %}
         <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
       {% else %}
         <li><a href="?page={{ i }}">{{ i }}</a></li>
@@ -66,3 +60,39 @@
 <!--<a href="/create/" class='btn btn-primary btn-lg'>Add New Employee</a>-->
 {%endblock%}
 
+{%block js%}
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/af-2.3.0/b-1.5.2/b-colvis-1.5.2/b-flash-1.5.2/b-html5-1.5.2/b-print-1.5.2/cr-1.5.0/fh-3.1.4/r-2.2.2/datatables.min.css"/>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.18/af-2.3.0/b-1.5.2/b-colvis-1.5.2/b-flash-1.5.2/b-html5-1.5.2/b-print-1.5.2/cr-1.5.0/fh-3.1.4/r-2.2.2/datatables.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.21/r-2.2.5/datatables.min.css"/>
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.21/r-2.2.5/datatables.min.js"></script>
+<script>
+
+    $(document).ready( function () {
+    $('#employeetable').DataTable({
+    'paging':false,
+}
+    );
+} );
+
+</script>
+
+<script>
+function myFunction() {
+  confirm("Are You Sure...!");
+}
+</script>
+
+<script>
+    $('#dtBasicExample').mdbEditor({
+    mdbEditor: true
+       });
+    $('.dataTables_length').addClass('bs-select');
+
+</script>
+
+{%endblock js%}

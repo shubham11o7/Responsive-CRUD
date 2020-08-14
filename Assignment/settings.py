@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'employe'
+
+    'employe',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -112,6 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -131,4 +134,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_DIRS = os.path.join(BASE_DIR,'static')
+STATICFILES_DIRS = (
+  os.path.join(BASE_DIR, 'static_root'),
+)
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')

@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+
 {% extends 'base.html'%}
+{% load crispy_forms_tags %}
 {%block body_block%}
 <h1> Add Employee</h1><hr>
  <form method="post">
     <table border='1'>
-    {{form}}
+    {{ form|crispy }}
      </table>
     {%csrf_token%}
     <br>

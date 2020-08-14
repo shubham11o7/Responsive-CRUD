@@ -1,6 +1,6 @@
 
 from django.urls import path
-from .views import Home,CreateView,UpdateView,DeleteView,search
+from .views import Home,CreateView,UpdateView,DeleteView
 
 urlpatterns = [
 
@@ -8,7 +8,7 @@ urlpatterns = [
     path('create/',CreateView),
     path('update/<emp_id>',UpdateView),
     path('delete/<emp_id>',DeleteView),
-    path('search/', search, name="search"),
+    # path('search/', search, name="search"),
     # url(r'^'update/(?P<emp_id>\d+)/$',UpdateView)
 
 ]
