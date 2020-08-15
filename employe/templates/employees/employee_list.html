@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block javascript %}
+  <script src="{% static 'employees/js/employees.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.21/af-2.3.5/kt-2.5.2/sp-1.1.1/datatables.min.css"/>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.21/af-2.3.5/kt-2.5.2/sp-1.1.1/datatables.min.js"></script>
+
+{% endblock %}
+
+{% block content %}
+  <h1 class="page-header">Employees</h1>
+
+  <p>
+    <button type="button" class="btn btn-primary js-create-employee" data-url="{% url 'employee_create' %}">
+      <span class="glyphicon glyphicon-plus"></span>
+      New Employee
+    </button>
+  </p>
+
+  <table class="table" id="employee-table">
+    <thead>
+      <tr>
+        <th>Employee ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Employee Address</th>
+        <th>Employee Salary</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% include 'employees/includes/partial_employee_list.html' %}
+    </tbody>
+  </table>
+
+{% if employees.has_other_pages %}
+  <ul class="pagination">
+    {% if employees.has_previous %}
+      <li><a href="?page={{ employees.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in employees.paginator.page_range %}
+      {% if employees.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li><a href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if employees.has_next %}
+      <li><a href="?page={{ employees.next_page_number }}">&raquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+  <div class="modal fade" id="modal-employee">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+      </div>
+    </div>
+  </div>
+{% endblock %}

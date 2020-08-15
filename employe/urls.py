@@ -1,14 +1,12 @@
+from django.conf.urls import url, include
+from django.views.generic import TemplateView
 
-from django.urls import path
-from .views import Home,CreateView,UpdateView,DeleteView
+from employe import views
 
 urlpatterns = [
-
-    path('',Home),
-    path('create/',CreateView),
-    path('update/<emp_id>',UpdateView),
-    path('delete/<emp_id>',DeleteView),
-    # path('search/', search, name="search"),
-    # url(r'^'update/(?P<emp_id>\d+)/$',UpdateView)
-
+    url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
+    url(r'^employees/$', views.employee_list, name='employee_list'),
+    url(r'^employees/create/$', views.employee_create, name='employee_create'),
+    url(r'^employees/(?P<emp_id>\d+)/update/$', views.employee_update, name='employee_update'),
+    url(r'^employees/(?P<emp_id>\d+)/delete/$', views.employee_delete, name='employee_delete'),
 ]
