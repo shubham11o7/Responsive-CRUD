@@ -63,7 +63,7 @@ def employee_delete(request, emp_id):
     if request.method == 'POST':
         employee.delete()
         data['form_is_valid'] = True
-        employees = employee.objects.all()
+        employees = Employee.objects.all()
         data['html_employee_list'] = render_to_string('employees/includes/partial_employee_list.html', {
             'employees': employees
         })

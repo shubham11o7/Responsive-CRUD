@@ -39,7 +39,9 @@
     $(document).ready( function () {
     $('#employee-table').DataTable({
     'paging':false,
-
+      "columnDefs": [
+    { "orderable": false, "targets": [0,3,4,5] }
+  ]
 
 });
 } );
